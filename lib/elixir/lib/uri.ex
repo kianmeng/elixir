@@ -41,7 +41,7 @@ defmodule URI do
     @moduledoc """
     An exception raised when an error occurs when a `URI` is invalid.
 
-    For example, see `URI.new!/1`.
+    For example, see `new!/1`.
     """
 
     defexception [:action, :reason, :part]
@@ -672,14 +672,15 @@ defmodule URI do
   @doc """
   Parses a URI into its components, without further validation.
 
+  Use `new/1` or `new!/1` if you want to validate the URI fields after
+  parsing. See the "Examples" section below.
+
   This function can parse both absolute and relative URLs. You can check
   if a URI is absolute or relative by checking if the `scheme` field is
   nil or not. Furthermore, this function expects both absolute and
   relative URIs to be well-formed and does not perform any validation.
-  See the "Examples" section below. Use `new/1` if you want to validate
-  the URI fields after parsing.
 
-  When a URI is given without a port, the value returned by `URI.default_port/1`
+  When a URI is given without a port, the value returned by `default_port/1`
   for the URI's scheme is used for the `:port` field. The scheme is also
   normalized to lowercase.
 
@@ -739,7 +740,7 @@ defmodule URI do
         userinfo: nil
       }
 
-  In contrast to `URI.new/1`, this function will parse poorly-formed
+  In contrast to `new/1`, this function will parse poorly-formed
   URIs, for example:
 
       iex> URI.parse("/invalid_greater_than_in_path/>")
